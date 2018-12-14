@@ -19,3 +19,9 @@ describe('Validations:', () => {
         }).to.throw('Input has an error.');
     });
 });
+
+describe('Parser:', () => {
+    it('Should output: example', () => {
+        
+    });
+});
