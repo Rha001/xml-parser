@@ -20,6 +20,12 @@ describe('Validations:', () => {
         }).to.throw('Input has an error.');
     });
 
+    it('Last char of input should be ">"', () => {
+        expect(() => {
+            new Parser('<xml>value</xml');
+        }).to.throw('Input has an error.');
+    });
+
     it('Should throw Malformed JSON.', () => {
         expect(() => {
             new Parser('<example><example>').parse()
@@ -40,6 +46,12 @@ describe('Parser:', () => {
         ).to.have.deep.property('tag', {tag2:{ tag3:"3"}});
     });
 
+    it('<xml><tag1>1</tag1><tag2><tag3><tag4>4</tag4></tag3></tag2></xml> Should return a valid JSON', () => {
+        expect(
+            new Parser(`<xml><tag1>1</tag1><tag2><tag3><tag4>4</tag4></tag3></tag2></xml>`).parse()
+        ).to.have.deep.property('xml', {tag1:"1", tag2: {tag3: {tag4: "4"}}});
+    });
+
     it('Should be able to parse given XML', () => {
         expect(
             new Parser(`<payment>
@@ -50,7 +62,7 @@ describe('Parser:', () => {
         ).to.have.deep.property('payment', {amount:"10.00",from:"Evan",to:"PayStand"});
     });
 
-    it('Should output a valid JSON', () => {
+    it('Should output a valid JSON string', () => {
         expect(
             JSON.stringify(new Parser(`<payment>
             <amount>10.00</amount>
