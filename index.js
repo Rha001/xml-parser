@@ -1,23 +1,7 @@
 const Parser = require('./xml-parser.js');
-const xml = `<payment>
-<amount>10.00</amount>
-<from>
-    <name>Evan</name>
-    <location>
-        <country>Mexico</country>
-        <city>Guadalajara</city>
-    </location>
-</from>
-<to>
-    <name>PayStand</name>
-    <country>USA</country>
-</to>
-<details>
-    <time>8:00</time>
-    <status>received</status>
-</details>
-</payment>`;
-let parser = new Parser(xml);
+const xml = `<tag><tag2><tag3>3</tag3></tag2></tag>`;
+let output = new Parser(xml).parse();
 
-parser.parse();
+console.log(JSON.stringify(output));
+
 process.exit(0);
